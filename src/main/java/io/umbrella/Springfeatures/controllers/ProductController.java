@@ -2,7 +2,6 @@ package io.umbrella.Springfeatures.controllers;
 
 import io.umbrella.Springfeatures.models.Product;
 import io.umbrella.Springfeatures.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
@@ -12,8 +11,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api")
 public class ProductController {
 
-    @Autowired
-    private ProductService productService;
+
+    private final ProductService productService;
+
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
     @GetMapping("/products")
     public Page<Product> getAllProducts(Pageable pageable) {

@@ -2,7 +2,6 @@ package io.umbrella.Springfeatures.controllers;
 
 import io.umbrella.Springfeatures.models.Brand;
 import io.umbrella.Springfeatures.service.BrandService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,8 +11,12 @@ import java.util.List;
 @RequestMapping("/api")
 public class BrandController {
 
-    @Autowired
-    private BrandService brandService;
+
+    private final BrandService brandService;
+
+    public BrandController(BrandService brandService) {
+        this.brandService = brandService;
+    }
 
     @GetMapping("/brands")
     public List<Brand> getAll() {

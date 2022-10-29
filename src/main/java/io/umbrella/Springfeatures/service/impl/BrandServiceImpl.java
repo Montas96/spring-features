@@ -21,6 +21,7 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public Brand findById(String ID) {
+        if(ID == null) throw  new RuntimeException("ID can not null");
         Optional<Brand> optionalBrand = brandRepository.findById(ID);
         if (!optionalBrand.isPresent()) {
             throw new RuntimeException("Brand can not be found");
