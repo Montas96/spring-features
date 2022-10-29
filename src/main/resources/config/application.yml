@@ -1,0 +1,15 @@
+mongock:
+  transaction-enabled: false
+  migration-scan-package:
+    - io.umbrella.Springfeatures.config.dbmigrations
+spring:
+  data:
+    mongodb:
+      database: SpringFeatures
+      host: localhost
+      port: 27017
+
+security:
+  app:
+    jwtSecret: myapplicationsecret
+    jwtExpirationMs: 86400000
