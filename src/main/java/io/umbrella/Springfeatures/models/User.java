@@ -31,8 +31,8 @@ public class User {
     @DBRef
     private Set<Role> roles = new HashSet<>();
 
+    private String imageUrl;
     private String provider;
-
     private String providerId;
 
     public User() {
@@ -42,6 +42,14 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getId() {

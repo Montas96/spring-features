@@ -3,7 +3,6 @@ package io.umbrella.Springfeatures.security.services;
 import io.umbrella.Springfeatures.exception.OAuth2AuthenticationProcessingException;
 import io.umbrella.Springfeatures.models.User;
 import io.umbrella.Springfeatures.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -17,8 +16,11 @@ import java.util.Optional;
 @Service
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public CustomOAuth2UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest oAuth2UserRequest) {
@@ -36,18 +38,16 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     private OAuth2User processOAuth2User(OAuth2UserRequest oAuth2UserRequest, OAuth2User oAuth2User) {
         OAuth2UserInfo oAuth2UserInfo = OAuth2UserInfoFactory.getOAuth2UserInfo(oAuth2UserRequest.getClientRegistration().getRegistrationId(), oAuth2User.getAttributes());
-        if(StringUtils.isEmpty(oAuth2UserInfo.getEmail())) {
+        if (!StringUtils.hasText(oAuth2UserInfo.getEmail())) {
             throw new OAuth2AuthenticationProcessingException("Email not found from OAuth2 provider");
         }
 
         Optional<User> userOptional = userRepository.findByUsername(oAuth2UserInfo.getEmail());
         User user;
-        if(userOptional.isPresent()) {
+        if (userOptional.isPresent()) {
             user = userOptional.get();
-            if(!user.getProvider().equals(oAuth2UserRequest.getClientRegistration().getRegistrationId())) {
-                throw new OAuth2AuthenticationProcessingException("Looks like you're signed up with " +
-                                                                          user.getProvider() + " account. Please use your " + user.getProvider() +
-                                                                          " account to login.");
+            if (!user.getProvider().equals(oAuth2UserRequest.getClientRegistration().getRegistrationId())) {
+                throw new OAuth2AuthenticationProcessingException("Looks like you're signed up with " + user.getProvider() + " account. Please use your " + user.getProvider() + " account to login.");
             }
             user = updateExistingUser(user, oAuth2UserInfo);
         } else {
@@ -64,13 +64,13 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         user.setProviderId(oAuth2UserInfo.getId());
         user.setUsername(oAuth2UserInfo.getEmail());
         user.setEmail(oAuth2UserInfo.getEmail());
-        //user.setImageUrl(oAuth2UserInfo.getImageUrl());
+        user.setImageUrl(oAuth2UserInfo.getImageUrl());
         return userRepository.save(user);
     }
 
     private User updateExistingUser(User existingUser, OAuth2UserInfo oAuth2UserInfo) {
         existingUser.setUsername(oAuth2UserInfo.getName());
-        //existingUser.setImageUrl(oAuth2UserInfo.getImageUrl());
+        existingUser.setImageUrl(oAuth2UserInfo.getImageUrl());
         return userRepository.save(existingUser);
     }
 

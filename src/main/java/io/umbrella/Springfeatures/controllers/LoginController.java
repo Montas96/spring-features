@@ -28,9 +28,7 @@ public class LoginController {
     @RequestMapping("/login/github")
     public String getOidcUserPrincipal(OAuth2AuthenticationToken principal) {
         System.out.println(principal);
-        OAuth2AuthorizedClient client = oAuth2AuthorizedClientService.loadAuthorizedClient(
-                principal.getAuthorizedClientRegistrationId(),
-                principal.getPrincipal().getName());
+        OAuth2AuthorizedClient client = oAuth2AuthorizedClientService.loadAuthorizedClient(principal.getAuthorizedClientRegistrationId(), principal.getPrincipal().getName());
 
         String getEmailUrl = "https://api.github.com/user/emails";
 

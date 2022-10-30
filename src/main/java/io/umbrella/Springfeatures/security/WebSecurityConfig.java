@@ -74,10 +74,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /*
-  By default, Spring OAuth2 uses HttpSessionOAuth2AuthorizationRequestRepository to save
-  the authorization request. But, since our service is stateless, we can't save it in
-  the session. We'll save the request in a Base64 encoded cookie instead.
-*/
+      By default, Spring OAuth2 uses HttpSessionOAuth2AuthorizationRequestRepository to save
+      the authorization request. But, since our service is stateless, we can't save it in
+      the session. We'll save the request in a Base64 encoded cookie instead.
+    */
     @Bean
     public HttpCookieOAuth2AuthorizationRequestRepository cookieAuthorizationRequestRepository() {
         return new HttpCookieOAuth2AuthorizationRequestRepository();
@@ -106,12 +106,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .oauth2Login()//.defaultSuccessUrl("/login/github")
-                 .authorizationEndpoint()
-//                .baseUri("/oauth2/authorization/github")
+                .oauth2Login()
+                .authorizationEndpoint()
                 .authorizationRequestRepository(cookieAuthorizationRequestRepository())
                 .and()
-               .redirectionEndpoint()
+                .redirectionEndpoint()
                 .baseUri("/login/oauth2/code/github")
                 .and()
                 .userInfoEndpoint()

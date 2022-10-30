@@ -16,7 +16,7 @@ public class Product implements Serializable {
     private String description;
     private String mainImage;
     private List<String> imagePaths;
-    private String  categoryId;
+    private String categoryId;
     private String brandId;
     private float rate;
     private double price;

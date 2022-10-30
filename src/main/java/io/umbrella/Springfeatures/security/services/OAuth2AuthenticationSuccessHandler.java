@@ -2,6 +2,7 @@ package io.umbrella.Springfeatures.security.services;
 
 import io.umbrella.Springfeatures.exception.BadRequestException;
 import io.umbrella.Springfeatures.security.jwt.JwtUtils;
+import io.umbrella.Springfeatures.utils.CookieUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
