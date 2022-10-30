@@ -3,6 +3,14 @@ mongock:
   migration-scan-package:
     - io.umbrella.Springfeatures.config.dbmigrations
 spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: af5d99afcd8748a518cb
+            client-secret: 235370b4be41c0f783d85e7f9f891fb2b1c75de1
+            scope: read:user, user:email
   data:
     mongodb:
       database: SpringFeatures

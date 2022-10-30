@@ -12,71 +12,91 @@ import java.util.Set;
 
 @Document(collection = "users")
 public class User {
-  @Id
-  private String id;
+    @Id
+    private String id;
 
-  @NotBlank
-  @Size(max = 20)
-  private String username;
+    @NotBlank
+    @Size(max = 20)
+    private String username;
 
-  @NotBlank
-  @Size(max = 50)
-  @Email
-  private String email;
+    @NotBlank
+    @Size(max = 50)
+    @Email
+    private String email;
 
-  @NotBlank
-  @Size(max = 120)
-  private String password;
+    @NotBlank
+    @Size(max = 120)
+    private String password;
 
-  @DBRef
-  private Set<Role> roles = new HashSet<>();
+    @DBRef
+    private Set<Role> roles = new HashSet<>();
 
-  public User() {
-  }
+    private String provider;
 
-  public User(String username, String email, String password) {
-    this.username = username;
-    this.email = email;
-    this.password = password;
-  }
+    private String providerId;
 
-  public String getId() {
-    return id;
-  }
+    public User() {
+    }
 
-  public void setId(String id) {
-    this.id = id;
-  }
+    public User(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
 
-  public String getUsername() {
-    return username;
-  }
+    public String getId() {
+        return id;
+    }
 
-  public void setUsername(String username) {
-    this.username = username;
-  }
+    public void setId(String id) {
+        this.id = id;
+    }
 
-  public String getEmail() {
-    return email;
-  }
+    public String getUsername() {
+        return username;
+    }
 
-  public void setEmail(String email) {
-    this.email = email;
-  }
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-  public String getPassword() {
-    return password;
-  }
+    public String getEmail() {
+        return email;
+    }
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-  public Set<Role> getRoles() {
-    return roles;
-  }
+    public String getPassword() {
+        return password;
+    }
 
-  public void setRoles(Set<Role> roles) {
-    this.roles = roles;
-  }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public String getProvider() {
+        return provider;
+    }
+
+    public void setProvider(String provider) {
+        this.provider = provider;
+    }
+
+    public String getProviderId() {
+        return providerId;
+    }
+
+    public void setProviderId(String providerId) {
+        this.providerId = providerId;
+    }
 }

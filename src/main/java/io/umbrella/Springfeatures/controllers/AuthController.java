@@ -12,6 +12,7 @@ import io.umbrella.Springfeatures.repository.RoleRepository;
 import io.umbrella.Springfeatures.repository.UserRepository;
 import io.umbrella.Springfeatures.security.jwt.JwtUtils;
 import io.umbrella.Springfeatures.security.services.UserDetailsImpl;
+import io.umbrella.Springfeatures.security.services.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -108,5 +109,11 @@ public class AuthController {
         userRepository.save(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+    }
+
+    @GetMapping("/token")
+    public ResponseEntity<?> getToken(@RequestParam String token){
+        System.out.println(token);
+        return ResponseEntity.ok(new JwtResponse(token, null, null, null, null));
     }
 }
