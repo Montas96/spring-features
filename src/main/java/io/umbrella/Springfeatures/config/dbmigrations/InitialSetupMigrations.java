@@ -26,17 +26,17 @@ public class InitialSetupMigrations {
         Role admin = new Role();
         admin.setId("ADMIN");
         admin.setName(ERole.ROLE_ADMIN);
-
+        mongoTemplate.save(admin);
         Role user = new Role();
         user.setId("USER");
         user.setName(ERole.ROLE_USER);
-
+        mongoTemplate.save(user);
         Role moderator = new Role();
         moderator.setId("MODERATOR");
         moderator.setName(ERole.ROLE_MODERATOR);
-
+        mongoTemplate.save(moderator);
         List<Role> roleList = Arrays.asList(admin, user, moderator);
-        mongoTemplate.save(roleList);
+        //mongoTemplate.save(roleList);
     }
 
     @RollbackExecution

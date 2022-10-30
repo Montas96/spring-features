@@ -1,5 +1,6 @@
 mongock:
   transaction-enabled: false
+  runner-type: ApplicationRunner
   migration-scan-package:
     - io.umbrella.Springfeatures.config.dbmigrations
 spring:
