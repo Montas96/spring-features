@@ -11,15 +11,13 @@
     <groupId>io.umbrella</groupId>
     <artifactId>Springfeatures</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>Spring-features</name>
     <description>Spring features</description>
     <properties>
         <java.version>11</java.version>
         <junit-platform.version>5.3.1</junit-platform.version>
         <!--<mockito.version>2.23.0</mockito.version>-->
-
-
     </properties>
     <dependencies>
         <dependency>
@@ -140,6 +138,26 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <!-- Build docker Image with maven -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <image>
+                        <name>docker.repo.com/library/${project.artifactId}:${project.version}</name>
+                        <publish>false</publish>
+                    </image>
+<!--                    <docker>-->
+<!--                        <publishRegistry>-->
+<!--                            <username>user</username>-->
+<!--                            <password>secret</password>-->
+<!--                            <url>https://docker.repo.com/v1/</url>-->
+<!--                            <email>user@example.com</email>-->
+<!--                        </publishRegistry>-->
+<!--                    </docker>-->
+                </configuration>
+            </plugin>
+
             <!--<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
